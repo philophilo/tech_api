@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+  api:
+    restart: always
+    build:
+      context: .
+    ports:
+      - '8787:8000'
+    expose:
+      - '8787'
+    volumes:
+      - ${PWD}:/app
+    stdin_open: true
+    tty: true
+    container_name: tech_api
+    command: "supervisord -c /etc/supervisor/conf.d/api.conf"
+networks:
+  default:
+    external:
+      name: tech_api_net
