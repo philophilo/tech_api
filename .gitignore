@@ -1,5 +1,5 @@
-app.err.log
-app.out.log
+api.err.log
+api.out.log
 supervisord.log
 supervisord.pid
 *.pyc
