@@ -32,7 +32,8 @@ export $(cat .env | xargs)
 # start app with gunicorn
 function start_app {
     info "Starting api"
-	python manage.py runserver 0.0.0.0:8000
+    # start app with gurnicorn and reload for development
+    gunicorn --bind :8000 --workers 3 --reload api.wsgi --log-level debug --access-logfile -
 	cd /app
 }
 
@@ -42,13 +43,20 @@ function add_package {
 	pip freeze > /app/requirements.txt
 }
 
+function django_shell {
+    info "Running Django shell"
+    python manage.py shell -i ipython
+}
 
-if [ $1 == "start" ];
+if [[ $1 == "start" ]];
 then
     start_app
-elif [ $1 == "package" ];
+elif [[ $1 == "package" ]];
 then
 	add_package $2
+elif [[ $1 == "django_shell" ]];
+then
+    django_shell
 else
     error "Unknown parameter \`$1\`"
 fi
