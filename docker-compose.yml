@@ -14,7 +14,3 @@ services:
     tty: true
     container_name: tech_api
     command: "supervisord -c /etc/supervisor/conf.d/api.conf"
-networks:
-  default:
-    external:
-      name: tech_api_net
