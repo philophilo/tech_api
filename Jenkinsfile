@@ -13,6 +13,7 @@ pipeline{
         stage("deploy") {
             steps {
                 echo 'deploy starting...'
+                sh 'docker-compose down'
                 sh 'docker-compose up -d'
             }
         }
