@@ -14,6 +14,7 @@ pipeline{
         stage("deploy") {
             steps {
                 echo 'deploy starting...'
+                sh 'docker network create tech_api_net'
                 sh 'docker-compose up'
                 sh 'yes | docker system prune'
             }
