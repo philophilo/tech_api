@@ -4,20 +4,18 @@ pipeline{
 
         stage("run test build") {
             steps {
-                sh '''
-                    echo "Starting build..."
-                    make build.
-                    echo "Build complete..."
-                '''
+                echo "Starting build..."
+                sh 'make build'
+                echo "Build complete..."
+                
             }
         }
 
         stage("deploy") {
             steps {
-                sh '''
-                    make start
-                    yes | docker system prune
-                '''
+                echo 'deploy starting...'
+                sh 'make start'
+                sh 'yes | docker system prune'
             }
         }
     }
