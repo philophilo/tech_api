@@ -3,30 +3,22 @@ pipeline{
     stages{
 
         stage("run test build") {
-            when {
-                branch "master";
-                branch "develop";
-            }
             steps {
-                sh '''
-                    echo "Starting build..."
-                    make build.
-                    echo "Build complete..."
-                '''
+                echo "Starting build..."
+                sh 'docker-compose build'
+                echo "Build complete..."
             }
         }
 
         stage("deploy") {
             when {
-                anyOf {
-                    branch "master";
-                }
+                branch "master";
             }
             steps {
-                sh '''
-                    make start
-                    yes | docker system prune
-                '''
+                echo 'deploy starting...'
+                sh 'docker network create tech_api_net'
+                sh 'docker-compose up -d'
+                sh 'yes | docker system prune'
             }
         }
     }
