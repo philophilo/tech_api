@@ -3,10 +3,6 @@ pipeline{
     stages{
 
         stage("run test build") {
-            when {
-                branch "master";
-                branch "develop";
-            }
             steps {
                 sh '''
                     echo "Starting build..."
@@ -17,11 +13,6 @@ pipeline{
         }
 
         stage("deploy") {
-            when {
-                anyOf {
-                    branch "master";
-                }
-            }
             steps {
                 sh '''
                     make start
