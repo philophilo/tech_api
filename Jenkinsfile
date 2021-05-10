@@ -4,7 +4,8 @@ pipeline{
 
         stage("run test build") {
             when {
-                branch "feature/*"
+                branch "master"
+                branch "develop";
             }
             steps {
                 sh '''
@@ -19,7 +20,6 @@ pipeline{
             when {
                 anyOf {
                     branch "master";
-                    branch "develop";
                 }
             }
             steps {
