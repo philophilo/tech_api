@@ -5,7 +5,7 @@ pipeline{
         stage("run test build") {
             steps {
                 echo "Starting build..."
-                sh 'make build'
+                sh 'docker-compose build'
                 echo "Build complete..."
                 
             }
