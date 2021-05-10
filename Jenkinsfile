@@ -12,6 +12,9 @@ pipeline{
         }
 
         stage("deploy") {
+            when {
+                branch "test-jenkins";
+            }
             steps {
                 echo 'deploy starting...'
                 sh 'docker network create tech_api_net'
