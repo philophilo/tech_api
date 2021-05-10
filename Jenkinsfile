@@ -4,12 +4,12 @@ pipeline{
 
         stage("run test build") {
             when {
-                branch "master"
+                branch "master";
                 branch "develop";
             }
             steps {
                 sh '''
-					echo "Starting build..."
+                    echo "Starting build..."
                     make build.
                     echo "Build complete..."
                 '''
